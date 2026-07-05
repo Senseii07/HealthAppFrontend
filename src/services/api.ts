@@ -1,22 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
-// Dynamically determine the API Base URL
-let API_BASE_URL = 'http://127.0.0.1:8000/api/';
-
-if (typeof window !== 'undefined') {
-  const savedUrl = localStorage.getItem('pcos_api_url');
-  if (savedUrl) {
-    API_BASE_URL = savedUrl;
-  } else if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    // Default production fallback for Render deployment
-    API_BASE_URL = 'https://pcos-companion-backend.onrender.com/api/';
-  }
-}
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
